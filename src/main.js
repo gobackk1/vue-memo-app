@@ -2,9 +2,7 @@ import Vue from "vue"
 import App from "./App.vue"
 import router from "./router"
 import store from "./store"
-import { initializeApp } from "firebase/app"
-import { getFirestore, connectFirestoreEmulator } from "firebase/firestore"
-import { getAuth, connectAuthEmulator } from "firebase/auth"
+import firebase from "firebase"
 // import { getAnalytics } from "firebase/analytics"
 
 const firebaseConfig = {
@@ -18,12 +16,15 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig)
 // const analytics = getAnalytics(app)
 
+// localではエミュレータを立てる
 if (window.location.hostname === "localhost") {
-  connectAuthEmulator(getAuth(), "http://localhost:9099")
-  connectFirestoreEmulator(getFirestore(), "localhost", 8888)
+  const auth = firebase.auth()
+  const db = firebase.firestore()
+  auth.useEmulator("http://localhost:9099")
+  db.useEmulator("localhost", 8888)
 }
 
 Vue.config.productionTip = false
