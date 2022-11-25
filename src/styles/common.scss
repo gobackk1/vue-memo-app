@@ -4,4 +4,20 @@ html {
   font-size: 62.5%;
   font-family: $font-family;
   background-color: $color-bg;
+  color: $color-text;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a:visited,
+a:hover,
+a:active,
+a:link {
+  color: $color-text;
+  text-decoration: none;
 }
