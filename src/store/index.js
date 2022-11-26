@@ -3,16 +3,21 @@ import Vuex from "vuex"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export const store = {
   state: {
-    currentListView: "column"
+    currentListView: "grid"
   },
   getters: {},
   mutations: {
-    toggleListView(state) {
-      state.currentListView = state.currentListView === "grid" ? "column" : "grid"
+    toggleListView(state, payload) {
+      const statusKeys = Object.keys(payload)
+      let nextIndex = statusKeys.indexOf(state.currentListView) + 1
+      nextIndex = nextIndex >= statusKeys.length ? 0 : nextIndex
+      state.currentListView = statusKeys[nextIndex]
     }
   },
   actions: {},
   modules: {}
-})
+}
+
+export default new Vuex.Store(store)
