@@ -1,8 +1,8 @@
-import ToggleStatusIcons from "./index.vue"
+import ToggleIconInteraction from "./index.vue"
 import store from "@/store"
 
 export default {
-  name: "ToggleStatusIcons"
+  name: "ToggleIconInteraction"
 }
 
 const statusIconMapping = {
@@ -14,7 +14,7 @@ const statusIconMapping = {
 export const Default = () => ({
   render() {
     return (
-      <ToggleStatusIcons
+      <ToggleIconInteraction
         status={store.state.currentListView}
         statusIconMapping={statusIconMapping}
         toggleStatus={() => {

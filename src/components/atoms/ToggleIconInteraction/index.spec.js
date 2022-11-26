@@ -1,15 +1,15 @@
-import ToggleStatusIcons from "./index.vue"
+import ToggleIconInteraction from "./index.vue"
 import { mount } from "@vue/test-utils"
 import Icon from "@/components/atoms/Icon"
 
-describe("ToggleStatusIcons", () => {
+describe("ToggleIconInteraction", () => {
   const statusIconMapping = {
     grid: "grid_view",
     column: "view_agenda",
     settings: "settings"
   }
   const toggleStatus = jest.fn()
-  const wrapper = mount(ToggleStatusIcons, {
+  const wrapper = mount(ToggleIconInteraction, {
     components: { Icon },
     propsData: {
       status: "grid",
