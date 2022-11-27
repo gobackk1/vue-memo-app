@@ -3,6 +3,7 @@ import App from "./App.vue"
 import router from "./router"
 import store from "./store"
 import firebase from "firebase"
+import "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
 
 const firebaseConfig = {
@@ -16,7 +17,7 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig)
+const firebaseApp = firebase.initializeApp(firebaseConfig)
 // const analytics = getAnalytics(app)
 
 // localではエミュレータを立てる
@@ -29,8 +30,15 @@ if (window.location.hostname === "localhost") {
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App)
-}).$mount("#app")
+let app
+const auth = firebaseApp.auth()
+
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: (h) => h(App)
+    }).$mount("#app")
+  }
+})
