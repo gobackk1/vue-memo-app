@@ -42,6 +42,7 @@ export default {
 }
 .menu {
   position: absolute;
+  top: 100%;
 }
 .clickable {
   cursor: pointer;
