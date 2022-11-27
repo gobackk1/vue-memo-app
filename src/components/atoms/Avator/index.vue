@@ -3,27 +3,30 @@
 </template>
 
 <script>
+import defaultAvatorURL from "@/assets/images/icon/default_avator.png"
+
 export default {
-  name: 'AppAvator',
+  name: "AppAvator",
   data() {
     return {
-      defaultAvatorURL: '/assets/images/icon/default_avator.png'
+      defaultAvatorURL
     }
   },
   props: {
-    avatorSrc: String,
+    avatorSrc: String
   },
   computed: {
     avatorStyles() {
-      const value = this.avatorSrc === undefined
-        ? `url(${this.defaultAvatorURL})`
-        : `url(${this.avatorSrc}), url(${this.defaultAvatorURL})`
+      const value =
+        this.avatorSrc === undefined
+          ? `url(${this.defaultAvatorURL})`
+          : `url(${this.avatorSrc}), url(${this.defaultAvatorURL})`
 
       return {
         backgroundImage: value
       }
     }
-  },
+  }
 }
 </script>
 
