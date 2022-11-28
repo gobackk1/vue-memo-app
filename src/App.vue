@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-    <Header :loginUser="loginUser" :menuList="menuList" />
+    <Header
+      :loginUser="loginUser"
+      :menuList="menuList"
+      :toggleStatus="toggleStatus"
+      :listViewStatus="listViewStatus"
+      :statusIconMapping="statusIconMapping"
+      :onClickMenu="onClickMenu"
+    />
     <router-view class="view" />
   </div>
 </template>
@@ -22,7 +29,11 @@ export default {
             this.logout()
           }
         }
-      ]
+      ],
+      statusIconMapping: {
+        grid: "grid_view",
+        column: "view_agenda"
+      }
     }
   },
   created() {
@@ -43,11 +54,20 @@ export default {
   computed: {
     loginUser() {
       return this.$store.state.loginUser
+    },
+    listViewStatus() {
+      return this.$store.state.currentListView
     }
   },
   methods: {
     ...mapActions(["setLoginUser", "logout"]),
-    ...mapMutations(["initializeAuth", "logoutUser"])
+    ...mapMutations(["initializeAuth", "logoutUser"]),
+    toggleStatus() {
+      this.$store.commit("toggleListView", this.statusIconMapping)
+    },
+    onClickMenu() {
+      this.$store.commit("toggleSideNav")
+    }
   }
 }
 </script>
