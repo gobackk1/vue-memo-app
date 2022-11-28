@@ -30,10 +30,16 @@ export default {
       return `material-icons ${this.iconSizeMap[size]}`
     }
   },
+  methods: {
+    onClickIcon(ev) {
+      ev.stopPropagation()
+      this.handleClick()
+    }
+  },
   render() {
-    const { handleClick, name, iconClass } = this
-    return handleClick ? (
-      <span onClick={handleClick} class={[iconClass, "clickable"]}>
+    const { onClickIcon, name, iconClass } = this
+    return onClickIcon ? (
+      <span onClick={onClickIcon} class={[iconClass, "clickable"]}>
         {name}
       </span>
     ) : (
