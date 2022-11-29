@@ -41,7 +41,7 @@ export default {
 
   &[disabled] {
     background-color: $color-gray-dark;
-    cursor: pointer;
+    cursor: default;
   }
 }
 </style>
