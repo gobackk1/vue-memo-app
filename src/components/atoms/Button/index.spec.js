@@ -2,18 +2,11 @@ import Button from "./index.vue"
 import { shallowMount } from "@vue/test-utils"
 
 describe("Button", () => {
-  const onClickButton = jest.fn()
   const buttonLabel = "ボタンラベル"
   const wrapper = shallowMount(Button, {
-    propsData: {
-      onClickButton
-    },
     slots: {
       default: buttonLabel
     }
-  })
-  it("子要素を描画すること", () => {
-    expect(wrapper.text()).toBe(buttonLabel)
   })
   it("propsで指定した色を描画すること", async () => {
     expect(wrapper.classes().includes("root-primary")).toBe(true)
@@ -24,8 +17,8 @@ describe("Button", () => {
     await wrapper.setProps({ color: "primary" })
     expect(wrapper.classes().includes("root-primary")).toBe(true)
   })
-  it("propsで渡したコールバックを実行すること", async () => {
+  it("clickイベントをemitすること", async () => {
     await wrapper.trigger("click")
-    expect(onClickButton).toHaveBeenCalledTimes(1)
+    expect(wrapper.emitted().click.length).toBe(1)
   })
 })

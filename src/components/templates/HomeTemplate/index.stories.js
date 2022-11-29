@@ -16,8 +16,8 @@ export const Default = () => ({
   template: `
     <div style="height: 100vh;">
       <HomeTemplate style="height: 100%;">
-        <Button slot="googleAuthButton" :onClickButton="onClickButton">google_auth_button</Button>
-        <Button slot="trialAuthButton" :onClickButton="onClickButton">trial_auth_button</Button>
+        <Button slot="googleAuthButton" @click="onClickButton">google_auth_button</Button>
+        <Button slot="trialAuthButton" @click="onClickButton">trial_auth_button</Button>
       </HomeTemplate>
     </div>
   `

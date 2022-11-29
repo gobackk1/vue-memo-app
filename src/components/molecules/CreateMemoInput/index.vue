@@ -11,7 +11,7 @@
       />
       <div v-show="isEditing" class="body">
         <textarea v-model="memoBody" rows="3" ref="body" placeholder="メモ本文を入力..." class="input-body"></textarea>
-        <Button :onClickButton="onClickCreate" :disabled="disabled" ref="create-button">作成</Button>
+        <Button @click="onClickCreate" :disabled="disabled" ref="create-button">作成</Button>
       </div>
     </div>
   </div>

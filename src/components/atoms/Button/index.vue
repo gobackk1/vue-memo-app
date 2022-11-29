@@ -1,12 +1,11 @@
 <template>
-  <button :class="buttonClasses" @click="onClickButton"><slot /></button>
+  <button :class="buttonClasses" v-on="$listeners" v-bind="$attrs"><slot /></button>
 </template>
 
 <script>
 export default {
   name: "AppButton",
   props: {
-    onClickButton: Function,
     color: {
       type: String,
       default: "primary"

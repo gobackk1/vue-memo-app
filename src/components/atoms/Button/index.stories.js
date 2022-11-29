@@ -23,7 +23,7 @@ const Template = (args, { argTypes }) => ({
     }
   },
   props: Object.keys(argTypes),
-  template: `<Button v-bind="$props" :onClickButton="onClickButton" type="button">default</Button>`
+  template: `<Button v-bind="$props" @click="onClickButton" type="button">default</Button>`
 })
 
 export const Default = Template.bind({})

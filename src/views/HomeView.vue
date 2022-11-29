@@ -1,7 +1,7 @@
 <template>
   <HomeTemplate>
-    <Button slot="googleAuthButton" :onClickButton="login">Googleアカウントでログインする</Button>
-    <Button slot="trialAuthButton" :onClickButton="() => {}">試用アカウントでログインする</Button>
+    <Button slot="googleAuthButton" @click="login">Googleアカウントでログインする</Button>
+    <Button slot="trialAuthButton" @click="() => {}">試用アカウントでログインする</Button>
   </HomeTemplate>
 </template>
 
