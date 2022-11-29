@@ -38,5 +38,10 @@ export default {
   &-danger {
     background-color: $color-danger;
   }
+
+  &[disabled] {
+    background-color: $color-gray-dark;
+    cursor: pointer;
+  }
 }
 </style>
