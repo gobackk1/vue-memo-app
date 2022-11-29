@@ -5,6 +5,9 @@ import store from "./store"
 import firebase from "firebase"
 import "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
+import VModal from "vue-js-modal"
+
+Vue.use(VModal)
 
 const firebaseConfig = {
   apiKey: "AIzaSyCUZVux1YiBBsej6muTDrrQFclXeSjNKqE",
