@@ -50,6 +50,10 @@ $font-size-map: (
   }
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .color-success {
   color: $color-success;
 }

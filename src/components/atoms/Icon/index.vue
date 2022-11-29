@@ -41,8 +41,4 @@ export default {
 }
 </script>
 
-<style module lang="scss">
-.clickable {
-  cursor: pointer;
-}
-</style>
+<style module lang="scss"></style>
