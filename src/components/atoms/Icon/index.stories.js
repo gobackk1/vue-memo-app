@@ -2,7 +2,7 @@ import Icon from "./index.vue"
 import { action } from "@storybook/addon-actions"
 
 export default {
-  title: "Icon",
+  name: "Icon",
   component: Icon
 }
 
@@ -28,9 +28,15 @@ export const MenuIconSizeXL = () => ({
   }
 })
 export const ClickableMenuIcon = () => ({
-  render() {
-    return <Icon name="menu" handle-click={action("click")} />
-  }
+  components: { Icon },
+  data() {
+    return {
+      onClick() {
+        action("click")()
+      }
+    }
+  },
+  template: `<Icon name="menu" @click="onClick" />`
 })
 export const WithInvalidIconSize = () => ({
   render() {

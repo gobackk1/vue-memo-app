@@ -1,3 +1,7 @@
+<template>
+  <span :class="iconClass" v-on="$listeners" v-bind="$attrs">{{ name }}</span>
+</template>
+
 <script>
 export default {
   name: "AppIcon",
@@ -19,15 +23,13 @@ export default {
     size: {
       type: String,
       default: "m"
-    },
-    handleClick: {
-      type: Function
     }
   },
   computed: {
     iconClass() {
+      const clickableClass = this.$listeners.click ? "clickable" : ""
       const size = Object.keys(this.iconSizeMap).includes(this.size) ? this.size : "m"
-      return `material-icons ${this.iconSizeMap[size]}`
+      return `material-icons ${this.iconSizeMap[size]} ${clickableClass}`
     }
   },
   methods: {
@@ -35,21 +37,11 @@ export default {
       ev.stopPropagation()
       this.handleClick()
     }
-  },
-  render() {
-    const { onClickIcon, name, iconClass } = this
-    return onClickIcon ? (
-      <span onClick={onClickIcon} class={[iconClass, "clickable"]}>
-        {name}
-      </span>
-    ) : (
-      <span class={iconClass}>{name}</span>
-    )
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style module lang="scss">
 .clickable {
   cursor: pointer;
 }

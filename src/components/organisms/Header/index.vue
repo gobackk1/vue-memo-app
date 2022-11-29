@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div v-if="loginUser" class="menu">
-      <Icon name="menu" size="l" :handleClick="onClickMenu" />
+      <Icon name="menu" size="l" @click="onClickMenu" />
     </div>
     <Heading class="title" level="1" visualLevel="1">MemoApp</Heading>
     <div v-if="loginUser" class="toolbar">

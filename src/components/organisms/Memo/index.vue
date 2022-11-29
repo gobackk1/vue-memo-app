@@ -5,8 +5,8 @@
       <Txt class="body"><slot /></Txt>
 
       <div class="hover-icon-menu">
-        <Icon name="archive" :handleClick="onClickArchive" />
-        <Icon name="delete" :handleClick="onClickDelete" />
+        <Icon name="archive" @click="onClickArchive" />
+        <Icon name="delete" @click="onClickDelete" />
       </div>
     </div>
   </div>

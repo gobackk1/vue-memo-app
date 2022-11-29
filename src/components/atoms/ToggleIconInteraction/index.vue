@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <Icon :name="iconName" size="l" :handleClick="toggleStatus" />
+    <Icon :name="iconName" size="l" @click="toggleStatus" />
   </div>
 </template>
 

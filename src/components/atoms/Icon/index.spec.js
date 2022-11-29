@@ -66,10 +66,24 @@ describe("Iconコンポーネント", () => {
   it("handleClick をイベントハンドラに登録すること", async () => {
     const handleClick = jest.fn()
     const wrapper = shallowMount(Icon, {
-      propsData: { handleClick, name }
+      propsData: { handleClick, name },
+      listeners: {
+        click: handleClick
+      }
     })
     await wrapper.trigger("click")
     expect(handleClick).toHaveBeenCalled()
+  })
+
+  it("$listeners.click があるときは clickable クラスをつけること", () => {
+    const handleClick = jest.fn()
+    const wrapper = shallowMount(Icon, {
+      propsData: { name },
+      listeners: {
+        click: handleClick
+      }
+    })
+    expect(wrapper.classes().includes("clickable")).toBe(true)
   })
 
   // it("スナップショットテスト", () => {
