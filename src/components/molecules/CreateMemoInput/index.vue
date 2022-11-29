@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :class="classes">
-      <input
+      <Input
         type="text"
         v-model="memoTitle"
         placeholder="メモのタイトルを入力..."
@@ -19,9 +19,10 @@
 
 <script>
 import Button from "@/components/atoms/Button"
+import Input from "@/components/atoms/Input"
 export default {
   name: "CreateMemoInput",
-  components: { Button },
+  components: { Button, Input },
   props: {
     createMemo: Function
   },
@@ -83,7 +84,6 @@ export default {
 }
 
 .input-title {
-  width: 100%;
   .is-editing & {
     margin-bottom: $space;
   }
