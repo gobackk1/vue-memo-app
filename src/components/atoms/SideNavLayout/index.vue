@@ -24,13 +24,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$width_side_nav: 200px;
-.side-nav {
-  width: $width_side_nav;
-  height: 100%;
+@import "@/styles/property";
 
-  &.is-folded {
-    width: 50px;
+.side-nav {
+  width: 50;
+  height: 100%;
+}
+
+@include rwd("pc") {
+  .side-nav {
+    width: 200px;
+    &.is-folded {
+      width: 50px;
+    }
   }
 }
 </style>

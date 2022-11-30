@@ -1,5 +1,5 @@
 import SideNavLayout from "./index.vue"
-import { list } from "@/components/organisms/NavList/index.stories"
+import { navList } from "@/devVariables"
 import VueRouter from "vue-router"
 import { routes } from "@/router"
 
@@ -25,5 +25,5 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({})
 Default.args = {
   isFolded: false,
-  list
+  list: navList
 }
