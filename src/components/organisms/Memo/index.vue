@@ -2,12 +2,12 @@
   <div>
     <div :class="$style.root">
       <div @click="onClickMemo" ref="area-memo">
-        <Heading level="3" visualLevel="5" :class="$style.heading">{{ memoTitle }}</Heading>
-        <Txt :class="$style.body"><slot /></Txt>
+        <Heading level="3" visualLevel="5" :class="$style.heading">{{ memo.title }}</Heading>
+        <Txt :class="$style.body">{{ memo.body }}</Txt>
       </div>
 
       <div :class="$style['hover-icon-menu']">
-        <IconsMenu :list="menuIcons" />
+        <IconsMenu :list="overrideMenuIcons" />
       </div>
     </div>
   </div>
@@ -22,9 +22,25 @@ export default {
   name: "AppMemo",
   components: { Heading, Txt, IconsMenu },
   props: {
-    memoTitle: String,
+    memo: Object,
     onClickMemo: Function,
     menuIcons: Array
+  },
+  data() {
+    return {
+      overrideMenuIcons: []
+    }
+  },
+  created() {
+    const { memo, menuIcons } = this
+    menuIcons.forEach((menu) => {
+      this.overrideMenuIcons.push({ ...menu })
+    })
+    this.overrideMenuIcons.forEach((menu, index) => {
+      menu.callback = function () {
+        menuIcons[index].callback(memo)
+      }
+    })
   }
 }
 </script>

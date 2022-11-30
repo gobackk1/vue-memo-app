@@ -1,7 +1,7 @@
 <template>
   <ul :class="[$style.root, modeStyle]">
     <li v-for="memo in memoList" :key="memo.id" :class="$style['list-item']">
-      <Memo :memoTitle="memo.title" :onClickMemo="showModal(memo)" :menuIcons="menuIcons">{{ memo.body }}</Memo>
+      <Memo :memo="memo" :onClickMemo="showModal(memo)" :menuIcons="menuIcons"></Memo>
     </li>
   </ul>
 </template>

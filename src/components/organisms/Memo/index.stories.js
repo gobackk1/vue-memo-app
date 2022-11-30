@@ -9,17 +9,15 @@ export default {
 const Template = (arg, { argTypes }) => ({
   components: { Memo },
   props: Object.keys(argTypes),
-  data() {
-    return {
-      body: "メモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文です"
-    }
-  },
-  template: `<Memo :list="list" :memoTitle="memoTitle" :onClickMemo="onClickMemo">{{body}}</Memo>`
+  template: `<Memo :list="list" :memo="memo" :onClickMemo="onClickMemo"></Memo>`
 })
 
 export const Default = Template.bind({})
 Default.args = {
-  memoTitle: "メモタイトル",
+  memo: {
+    title: "メモタイトル",
+    body: "メモ本文"
+  },
   menuIcons: list,
   onClickMemo() {
     action("click onClickMemo")()

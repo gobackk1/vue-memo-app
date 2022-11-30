@@ -6,7 +6,10 @@ describe("Memo", () => {
   describe("props", () => {
     const wrapper = shallowMount(Memo, {
       propsData: {
-        memoTitle: "メモタイトル",
+        memo: {
+          title: "title",
+          body: "body"
+        },
         onClickMemo
       },
       slots: {
