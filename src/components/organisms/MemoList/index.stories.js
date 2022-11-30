@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions"
 import MemoEditor from "@/components/molecules/MemoEditor"
 import VModal from "vue-js-modal"
 import Vue from "vue"
-import { list } from "@/components/molecules/IconsMenu/data"
+import { iconList } from "@/devVariables"
 
 Vue.use(VModal)
 
@@ -74,7 +74,7 @@ const Template = (args, { argTypes }) => ({
               }
             }
           },
-          { memo, list },
+          { memo, list: iconList },
           { height: "auto" }
         )
       }

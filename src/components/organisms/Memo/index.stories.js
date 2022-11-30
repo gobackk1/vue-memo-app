@@ -1,6 +1,6 @@
 import Memo from "./index"
 import { action } from "@storybook/addon-actions"
-import { list } from "@/components/molecules/IconsMenu/data"
+import { iconList } from "@/devVariables"
 
 export default {
   name: "Memo"
@@ -18,7 +18,7 @@ Default.args = {
     title: "メモタイトル",
     body: "メモ本文"
   },
-  menuIcons: list,
+  menuIcons: iconList,
   onClickMemo() {
     action("click onClickMemo")()
   }

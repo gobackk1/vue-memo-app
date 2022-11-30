@@ -2,7 +2,7 @@ import MemoEditor from "./index"
 import VModal from "vue-js-modal"
 import Vue from "vue"
 import { action } from "@storybook/addon-actions"
-import { list } from "@/components/molecules/IconsMenu/data"
+import { iconList } from "@/devVariables"
 import Button from "@/components/atoms/Button"
 
 Vue.use(VModal)
@@ -19,7 +19,7 @@ export const Default = () => ({
         body: "bodya",
         id: 1
       },
-      list
+      list: iconList
     }
   },
   methods: {

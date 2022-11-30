@@ -1,5 +1,5 @@
 import IconsMenu from "./index.vue"
-import { list } from "./data"
+import { iconList } from "@/devVariables"
 
 export default {
   name: "IconsMenu"
@@ -8,7 +8,7 @@ export default {
 export const Default = () => ({
   data() {
     return {
-      list
+      list: iconList
     }
   },
   render() {
