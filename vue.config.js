@@ -5,5 +5,6 @@ module.exports = defineConfig({
     storybook: {
       allowedPlugins: ["define"]
     }
-  }
+  },
+  runtimeCompiler: true
 })
