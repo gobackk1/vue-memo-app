@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="root">
+    <div :class="$style.root">
       <div @click="onClickMemo" ref="area-memo">
-        <Heading level="3" visualLevel="5" class="heading">{{ memoTitle }}</Heading>
-        <Txt class="body"><slot /></Txt>
+        <Heading level="3" visualLevel="5" :class="$style.heading">{{ memoTitle }}</Heading>
+        <Txt :class="$style.body"><slot /></Txt>
       </div>
 
-      <div class="hover-icon-menu">
+      <div :class="$style['hover-icon-menu']">
         <IconsMenu :list="menuIcons" />
       </div>
     </div>
@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 @import "@/styles/property";
 
 .root {
