@@ -48,12 +48,20 @@ const Template = (args, { argTypes }) => ({
   data() {
     return {
       memoList,
-      onClickArchive(memo) {
-        action("click onClickArchive")(memo)
-      },
-      onClickDelete(memo) {
-        action("click onClickDelete")(memo)
-      },
+      iconMenu: [
+        {
+          name: "delete",
+          callback() {
+            action("delete")()
+          }
+        },
+        {
+          name: "archive",
+          callback() {
+            action("archive")()
+          }
+        }
+      ],
       onClickMemo(memo) {
         this.$modal.show(
           {
@@ -72,7 +80,7 @@ const Template = (args, { argTypes }) => ({
       }
     }
   },
-  template: `<MemoList :mode="mode" :memoList="memoList" :onClickArchive="onClickArchive" :onClickDelete="onClickDelete" :onClickMemo="onClickMemo" />`
+  template: `<MemoList :mode="mode" :memoList="memoList" :onClickMemo="onClickMemo" :menuIcons="iconMenu" />`
 })
 
 export const Default = Template.bind({})

@@ -29,7 +29,21 @@ describe("MemoList", () => {
     const wrapper = shallowMount(MemoList, {
       propsData: {
         memoList,
-        mode: "grid"
+        mode: "grid",
+        menuIcons: [
+          {
+            name: "delete",
+            callback() {
+              //TODO dispatch delete
+            }
+          },
+          {
+            name: "archive",
+            callback() {
+              //TODO dispatch archive
+            }
+          }
+        ]
       }
     })
     it("カラムビューとグリッドビューとで切り替えられること", async () => {

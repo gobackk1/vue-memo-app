@@ -1,13 +1,7 @@
 <template>
   <ul :class="[$style.root, modeStyle]">
     <li v-for="memo in memoList" :key="memo.id" :class="$style['list-item']">
-      <Memo
-        :memoTitle="memo.title"
-        :onClickArchive="archiveMemo(memo)"
-        :onClickDelete="deleteMemo(memo)"
-        :onClickMemo="showModal(memo)"
-        >{{ memo.body }}</Memo
-      >
+      <Memo :memoTitle="memo.title" :onClickMemo="showModal(memo)" :menuIcons="menuIcons">{{ memo.body }}</Memo>
     </li>
   </ul>
 </template>
@@ -20,27 +14,14 @@ export default {
   props: {
     memoList: Array,
     mode: String,
-    onClickArchive: Function,
-    onClickDelete: Function,
-    onClickMemo: Function
+    onClickMemo: Function,
+    menuIcons: Array
   },
   methods: {
     showModal(memo) {
       const that = this
       return function () {
         that.onClickMemo(memo)
-      }
-    },
-    archiveMemo(memo) {
-      const that = this
-      return function () {
-        that.onClickArchive(memo)
-      }
-    },
-    deleteMemo(memo) {
-      const that = this
-      return function () {
-        that.onClickDelete(memo)
       }
     }
   },

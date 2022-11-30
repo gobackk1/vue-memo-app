@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div class="root" @click="onClickMemo">
-      <Heading level="3" visualLevel="5" class="heading">{{ memoTitle }}</Heading>
-      <Txt class="body"><slot /></Txt>
+    <div class="root">
+      <div @click="onClickMemo" ref="area-memo">
+        <Heading level="3" visualLevel="5" class="heading">{{ memoTitle }}</Heading>
+        <Txt class="body"><slot /></Txt>
+      </div>
 
       <div class="hover-icon-menu">
-        <Icon name="archive" @click="onClickArchive" />
-        <Icon name="delete" @click="onClickDelete" />
+        <IconsMenu :list="menuIcons" />
       </div>
     </div>
   </div>
@@ -15,16 +16,15 @@
 <script>
 import Heading from "@/components/atoms/Heading"
 import Txt from "@/components/atoms/Txt"
-import Icon from "@/components/atoms/Icon"
+import IconsMenu from "@/components/molecules/IconsMenu"
 
 export default {
   name: "AppMemo",
-  components: { Heading, Txt, Icon },
+  components: { Heading, Txt, IconsMenu },
   props: {
     memoTitle: String,
-    onClickArchive: Function,
-    onClickDelete: Function,
-    onClickMemo: Function
+    onClickMemo: Function,
+    menuIcons: Array
   }
 }
 </script>

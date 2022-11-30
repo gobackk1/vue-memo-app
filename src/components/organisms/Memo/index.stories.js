@@ -1,5 +1,6 @@
 import Memo from "./index"
 import { action } from "@storybook/addon-actions"
+import { list } from "@/components/molecules/IconsMenu/data"
 
 export default {
   name: "Memo"
@@ -13,18 +14,13 @@ const Template = (arg, { argTypes }) => ({
       body: "メモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文ですメモ本文です"
     }
   },
-  template: `<Memo :memoTitle="memoTitle" :onClickDelete="onClickDelete" :onClickArchive="onClickArchive" :onClickMemo="onClickMemo">{{body}}</Memo>`
+  template: `<Memo :list="list" :memoTitle="memoTitle" :onClickMemo="onClickMemo">{{body}}</Memo>`
 })
 
 export const Default = Template.bind({})
 Default.args = {
   memoTitle: "メモタイトル",
-  onClickArchive() {
-    action("click onClickArchive")()
-  },
-  onClickDelete() {
-    action("click onClickDelete")()
-  },
+  menuIcons: list,
   onClickMemo() {
     action("click onClickMemo")()
   }

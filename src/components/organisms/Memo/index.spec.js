@@ -17,7 +17,7 @@ describe("Memo", () => {
       expect(wrapper.text()).toContain("メモタイトル")
     })
     it("アイコンメニュー以外のメモ領域をクリックしたら、onClickMemo を実行すること", async () => {
-      await wrapper.element.querySelector(".root").click()
+      await wrapper.findComponent({ ref: "area-memo" }).trigger("click")
       expect(onClickMemo).toHaveBeenCalledTimes(1)
     })
   })
