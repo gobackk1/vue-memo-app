@@ -1,11 +1,5 @@
 <template>
-  <textarea
-    :class="$style.root"
-    :value="value"
-    @input="$emit('input', $event.target.value)"
-    @focus="$emit('focus')"
-    v-bind="$attrs"
-  ></textarea>
+  <textarea :class="$style.root" v-on="$listeners" v-bind="$attrs"></textarea>
 </template>
 
 <script>

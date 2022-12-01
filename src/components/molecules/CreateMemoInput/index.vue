@@ -3,14 +3,20 @@
     <div :class="classes">
       <Input
         type="text"
-        v-model="title"
         placeholder="メモのタイトルを入力..."
         @focus="onFocusInput"
+        @input="title = $event.target.value"
         class="input-title"
         ref="title"
       />
       <div v-show="isEditing" class="body">
-        <textarea v-model="body" rows="3" ref="body" placeholder="メモ本文を入力..." class="input-body"></textarea>
+        <Textarea
+          @input="body = $event.target.value"
+          rows="3"
+          ref="body"
+          placeholder="メモ本文を入力..."
+          class="input-body"
+        ></Textarea>
         <Button @click="onClickCreate" :disabled="disabled" ref="create-button">作成</Button>
       </div>
     </div>
@@ -20,9 +26,10 @@
 <script>
 import Button from "@/components/atoms/Button"
 import Input from "@/components/atoms/Input"
+import Textarea from "@/components/atoms/Textarea"
 export default {
   name: "CreateMemoInput",
-  components: { Button, Input },
+  components: { Button, Input, Textarea },
   props: {
     createMemo: Function
   },
@@ -38,7 +45,7 @@ export default {
       if (!this.isEditing) {
         this.isEditing = true
         this.$nextTick(() => {
-          this.$refs.body.focus()
+          this.$refs.body.$el.focus()
         })
       }
     },
@@ -49,6 +56,8 @@ export default {
       })
       this.title = ""
       this.body = ""
+      this.$refs.title.$el.value = ""
+      this.$refs.body.$el.value = ""
       this.isEditing = false
     },
     closeTextarea(ev) {
@@ -90,7 +99,6 @@ export default {
 }
 
 .input-body {
-  width: 100%;
   margin-bottom: $space;
 }
 

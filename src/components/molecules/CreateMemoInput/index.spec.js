@@ -6,8 +6,8 @@ describe("CreateMemoInput", () => {
     it("createMemoの引数のチェック", async () => {
       const createMemo = jest.fn()
       const memoData = {
-        memoTitle: "title",
-        memoBody: "body"
+        title: "title",
+        body: "body"
       }
       const wrapper = mount(CreateMemoInput, {
         propsData: {
@@ -22,8 +22,8 @@ describe("CreateMemoInput", () => {
   describe("ユーザーアクション", () => {
     const createMemo = jest.fn()
     const memoData = {
-      memoTitle: "title",
-      memoBody: "body"
+      title: "title",
+      body: "body"
     }
     let wrapper
 
@@ -61,13 +61,13 @@ describe("CreateMemoInput", () => {
       expect(wrapper.findComponent({ ref: "create-button" }).isVisible()).toBe(false)
     })
     it("タイトルと本文が未入力の時は、ボタンを無効にすること", async () => {
-      await wrapper.setData({ isEditing: true, memoTitle: "", memoBody: "" })
+      await wrapper.setData({ isEditing: true, title: "", body: "" })
       expect(wrapper.findComponent({ ref: "create-button" }).attributes().disabled).not.toBe(undefined)
     })
     it("タイトルか本文かのどちらかが入力してある時、ボタンを有効にすること", async () => {
-      await wrapper.setData({ isEditing: true, memoTitle: "title", memoBody: "" })
+      await wrapper.setData({ isEditing: true, title: "title", body: "" })
       expect(wrapper.findComponent({ ref: "create-button" }).attributes().disabled).toBe(undefined)
-      await wrapper.setData({ isEditing: true, memoTitle: "", memoBody: "body" })
+      await wrapper.setData({ isEditing: true, title: "", body: "body" })
       expect(wrapper.findComponent({ ref: "create-button" }).attributes().disabled).toBe(undefined)
     })
   })
