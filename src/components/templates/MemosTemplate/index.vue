@@ -1,17 +1,15 @@
 <template>
-  <div :class="[classes, $style.root]">
-    <SideNavLayout :isFolded="isFolded">
-      <NavList slot="side" :list="list" />
-      <main :class="$style.main" slot="contents">
-        <div :class="$style['create-memo']">
-          <slot name="create-memo-input" />
-        </div>
-        <div :class="$style.contents">
-          <slot class="contents" name="contents" />
-        </div>
-      </main>
-    </SideNavLayout>
-  </div>
+  <SideNavLayout :isFolded="isFolded">
+    <NavList slot="side" :list="list" />
+    <main :class="$style.main" slot="contents">
+      <div :class="$style['create-memo']">
+        <slot name="create-memo-input" />
+      </div>
+      <div :class="$style.contents">
+        <slot class="contents" name="contents" />
+      </div>
+    </main>
+  </SideNavLayout>
 </template>
 
 <script>
@@ -28,11 +26,6 @@ export default {
   },
   props: {
     isFolded: Boolean
-  },
-  computed: {
-    classes() {
-      return this.isFolded ? this.$style.isFolded : null
-    }
   }
 }
 </script>
