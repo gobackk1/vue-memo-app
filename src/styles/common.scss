@@ -69,3 +69,8 @@ $font-size-map: (
 .color-primary {
   color: $color-primary;
 }
+
+// NOTE: 3rd ベンダースタイルのオーバーライドはここに書く。記述が増えたらモジュールへ切り出す
+.vm--modal {
+  background-color: $color-bg !important;
+}
