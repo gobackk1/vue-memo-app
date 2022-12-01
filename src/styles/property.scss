@@ -1,0 +1,105 @@
+/*
+  バリュー層
+  - 色：色相名とカラーコードの紐づけたカラーパレット
+*/
+$color-white: #f0eff1;
+$color-black: #111111;
+$color-gray: #999999;
+$color-gray-dark: #666666;
+$color-gray-light: #bfbfbf;
+$color-gray-pale: #d9d9d9;
+$color-green: none;
+$color-red: none;
+
+/*
+  ブランディング層
+  - サービスにおける色の意味などユーザーに連想させるものを制御する
+  - 全てのプラットフォームや媒体に適用したいデザイン要素を集約
+*/
+$color-base: $color-black;
+$color-link: $color-green;
+$color-link-visited: none;
+$color-link-hover: none;
+$color-active: none;
+$color-success: #56a46a;
+$color-danger: #f44336;
+$color-warning: #d49432;
+$color-info: #6e8ba6;
+$color-primary: #0580a9;
+$color-secondary: none;
+$color-accent: none;
+$color-selected: $color-gray-pale;
+
+$color-bg: #191919;
+
+/*
+  メディア層
+  - プラットフォームや媒体ごとに最適化する必要のあるデザイン要素を集約
+*/
+/* 媒体固有で使用する色 */
+$color-text: $color-white;
+$color-text-outlined: none;
+$color-tip: $color-gray-dark;
+$color-line: #46453a;
+$color-info-layer1: none;
+$color-info-layer2: none;
+$color-header: none;
+$color-card: none;
+$color-card-header: none;
+
+$color-header-bg: $color-black;
+$color-header-text: $color-text;
+
+/* 媒体ごとに最適化した文字サイズ */
+$font-size-xxs: none;
+$font-size-xs: 1rem;
+$font-size-s: 1.3rem;
+$font-size-m: 1.6rem;
+$font-size-l: 1.8rem;
+$font-size-xl: 2rem;
+$font-size-xxl: 2.4rem;
+$font-size-xxxl: 3rem;
+$font-size-xxxxl: none;
+
+$font-family: sans-serif;
+
+/* 文字：太さ（媒体に最適化した文字の太さ） */
+$font-weight-default: 500;
+$font-weight-bold: 700;
+
+/* 余白（媒体に最適化した余白単位） */
+$space: 8px;
+
+/* 枠に関する要素（媒体に最適化した枠デザイン要素） */
+$line-width: 1px;
+$line-style: solid;
+$radius: 10px;
+$border: $line-width $line-style $color-line;
+
+/* フィードバックの定義（媒体に最適化したフィードバック・デザイン要素） */
+$hover-feedback-opacity: 0.7;
+
+/* アニメーションの定義（媒体に最適化したアニメーション・デザイン要素） */
+$hover-animation-duration: 0.1s;
+$hover-animation-timing: ease-out;
+$hover-animation: $hover-animation-duration $hover-animation-timing;
+$fade-animation-duration: 0.2s;
+$fade-animation-timing: linear;
+$fade-animation: $fade-animation-duration $fade-animation-timing;
+/* Z 座標の管理（Web 媒体／CSS では Z 座標を管理する） */
+$z-header: 10;
+
+/*
+  ブレークポイントは１つで、pcとtab、spとを分ける
+*/
+@mixin rwd($device) {
+  @if $device == "pc" {
+    @media screen and (min-width: 768px) {
+      @content;
+    }
+  } @else if $device == "sp" {
+    @media screen and (max-width: 767px) {
+      @content;
+    }
+  }
+}

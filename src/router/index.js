@@ -1,27 +1,56 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue"
+import VueRouter from "vue-router"
+import HomeView from "../views/HomeView.vue"
+import MemosView from "../views/MemosView.vue"
+import ArchivesView from "../views/ArchivesView.vue"
+import TrashesView from "../views/TrashesView.vue"
+import store from "@/store"
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: HomeView,
+    beforeEnter(to, from, next) {
+      if (store.state.loginUser) {
+        next("memos")
+      } else {
+        next()
+      }
+    }
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: "/memos",
+    name: "memos",
+    component: MemosView,
+    beforeEnter(to, from, next) {
+      if (store.state.loginUser) {
+        next()
+      } else {
+        next("home")
+      }
+    }
+  },
+  {
+    path: "/archives",
+    name: "archives",
+    component: ArchivesView
+  },
+  {
+    path: "/trashes",
+    name: "trashes",
+    component: TrashesView
+  },
+  {
+    path: "*",
+    redirect: "/"
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
 })

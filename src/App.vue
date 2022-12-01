@@ -1,32 +1,86 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <Header
+      :loginUser="loginUser"
+      :menuList="menuList"
+      :toggleStatus="toggleStatus"
+      :listViewStatus="listViewStatus"
+      :statusIconMapping="statusIconMapping"
+      :onClickMenu="onClickMenu"
+    />
+    <router-view class="view" />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Header from "@/components/organisms/Header"
+import firebase from "firebase"
+import { mapActions, mapMutations } from "vuex"
 
-nav {
-  padding: 30px;
+export default {
+  components: { Header },
+  data() {
+    return {
+      menuList: [
+        {
+          name: "ログアウト",
+          callback: () => {
+            if (!window.confirm("ログアウトしても良いですか？")) return
+            this.logout()
+          }
+        }
+      ],
+      statusIconMapping: {
+        grid: "grid_view",
+        column: "view_agenda"
+      }
+    }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.setLoginUser(user)
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+      if (user) {
+        if (this.$route.name === "home") {
+          this.$router.push("memos")
+        }
+      } else {
+        if (this.$route.name !== "home") {
+          this.$router.push("home")
+        }
+      }
+    })
+  },
+  computed: {
+    loginUser() {
+      return this.$store.state.loginUser
+    },
+    listViewStatus() {
+      return this.$store.state.currentListView
+    }
+  },
+  methods: {
+    ...mapActions(["setLoginUser", "logout"]),
+    ...mapMutations(["initializeAuth", "logoutUser"]),
+    toggleStatus() {
+      this.$store.commit("toggleListView", this.statusIconMapping)
+    },
+    onClickMenu() {
+      this.$store.commit("toggleSideNav")
     }
   }
+}
+</script>
+
+<style lang="scss">
+@import "@/styles/reset.css";
+@import "@/styles/common.scss";
+@import "@/styles/icons.scss";
+
+#app {
+  height: 100vh;
+}
+.view {
+  height: calc(100% - 50px);
 }
 </style>

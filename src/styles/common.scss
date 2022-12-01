@@ -1,0 +1,81 @@
+@import "./property";
+
+// 変数
+$app-prefix: "App--";
+
+// リセット
+html {
+  font-size: 62.5%;
+  font-family: $font-family;
+  background-color: $color-bg;
+  color: $color-text;
+}
+
+body {
+  font-size: $font-size-m;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a:visited,
+a:hover,
+a:active,
+a:link {
+  color: $color-text;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+// アプリの抽象的なCSSクラス
+$font-size-map: (
+  xxs: $font-size-xxs,
+  xs: $font-size-xs,
+  s: $font-size-s,
+  m: $font-size-m,
+  l: $font-size-l,
+  xl: $font-size-xl,
+  xxl: $font-size-xxl,
+  xxxl: $font-size-xxxl,
+  xxxxl: $font-size-xxxxl
+);
+
+@each $key, $value in $font-size-map {
+  .#{$app-prefix}size-#{$key} {
+    font-size: $value;
+  }
+}
+
+.#{$app-prefix}clickable {
+  cursor: pointer;
+}
+
+.#{$app-prefix}color-success {
+  color: $color-success;
+}
+.#{$app-prefix}color-danger {
+  color: $color-danger;
+}
+.#{$app-prefix}color-warning {
+  color: $color-warning;
+}
+.#{$app-prefix}color-info {
+  color: $color-info;
+}
+.#{$app-prefix}color-primary {
+  color: $color-primary;
+}
+
+// NOTE: 3rd ベンダースタイルのオーバーライドはここに書く。記述が増えたらモジュールへ切り出す
+.vm--modal {
+  background-color: $color-bg !important;
+}
