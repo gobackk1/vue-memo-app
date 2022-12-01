@@ -58,9 +58,16 @@ export default {
     background-color: $color-gray;
   }
 }
-.is-folded {
+.label-text {
+  display: none;
+}
+
+@include rwd("pc") {
   .label-text {
-    display: none;
+    display: block;
+    .is-folded & {
+      display: none;
+    }
   }
 }
 </style>

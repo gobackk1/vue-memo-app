@@ -1,40 +1,45 @@
 <template>
-  <div :class="classes">
-    <div>
-      <NavList :list="list" :isFolded="isFolded" />
+  <div :class="[$style.root, foldedClass]">
+    <div :class="$style.side">
+      <slot name="side" />
+    </div>
+    <div :class="$style.contents">
+      <slot name="contents" />
     </div>
   </div>
 </template>
 
 <script>
-import NavList from "@/components/organisms/NavList"
 export default {
   name: "SideNavLayout",
-  components: { NavList },
   props: {
-    list: Array,
     isFolded: Boolean
   },
   computed: {
-    classes() {
-      return this.isFolded ? ["side-nav", "is-folded"] : ["side-nav"]
+    foldedClass() {
+      return this.isFolded ? this.$style.isFolded : null
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style module lang="scss">
 @import "@/styles/property";
-
-.side-nav {
-  width: 50;
+.root {
+  display: flex;
+}
+.contents {
+  flex: 1;
+  padding: $space * 2;
+}
+.side {
+  width: 50px;
   height: 100%;
 }
-
 @include rwd("pc") {
-  .side-nav {
+  .side {
     width: 200px;
-    &.is-folded {
+    .isFolded & {
       width: 50px;
     }
   }
