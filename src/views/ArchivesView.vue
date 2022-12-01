@@ -14,8 +14,9 @@
 
 <script>
 import ArchiveTemplate from "@/components/templates/ArchiveTemplate"
-import MemoEditor from "@/components/molecules/MemoEditor"
 import MemoList from "@/components/organisms/MemoList"
+import { showMemoModal } from "@/mixins/memoModal"
+
 export default {
   name: "ArchiveView",
   components: { ArchiveTemplate, MemoList },
@@ -51,28 +52,12 @@ export default {
     onClickDelete({ id }) {
       // TODO: dispatch('action', id) の実装
       console.log(id, "onClickDelete")
-    },
-    showModal(memo) {
-      this.$modal.show(
-        {
-          components: { MemoEditor },
-          template: `<MemoEditor :list="list" :memo="memo" @clickUpdate="clickUpdate" />`,
-          props: ["list", "memo"],
-          methods: {
-            clickUpdate(memo) {
-              //TODO: dispatch update
-              console.log(memo, "clickUpdate")
-            }
-          }
-        },
-        { memo, list: this.iconMenu },
-        { height: "auto" }
-      )
     }
   },
   created() {
     // TODO: アーカイブメモのみ取得する getter を実装する
     this.memoList = this.$store.state.memoList
-  }
+  },
+  mixins: [showMemoModal]
 }
 </script>

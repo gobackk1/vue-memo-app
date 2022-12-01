@@ -14,8 +14,8 @@
 <script>
 import MemosTemplate from "@/components/templates/MemosTemplate"
 import MemoList from "@/components/organisms/MemoList"
-import MemoEditor from "@/components/molecules/MemoEditor"
 import CreateMemoInput from "@/components/molecules/CreateMemoInput"
+import { showMemoModal } from "@/mixins/memoModal"
 
 export default {
   name: "MemosView",
@@ -52,23 +52,6 @@ export default {
       // TODO: dispatch('action', id) の実装
       console.log(id, "onClickDelete")
     },
-    showModal(memo) {
-      this.$modal.show(
-        {
-          components: { MemoEditor },
-          template: `<MemoEditor :list="list" :memo="memo" @clickUpdate="clickUpdate" />`,
-          props: ["list", "memo"],
-          methods: {
-            clickUpdate(memo) {
-              //TODO: dispatch update
-              console.log(memo, "clickUpdate")
-            }
-          }
-        },
-        { memo, list: this.iconMenu },
-        { height: "auto" }
-      )
-    },
     createMemo() {
       // TODO: dispatch('action', id) の実装
       console.log("createMemo")
@@ -76,6 +59,7 @@ export default {
   },
   created() {
     this.memoList = this.$store.state.memoList
-  }
+  },
+  mixins: [showMemoModal]
 }
 </script>
