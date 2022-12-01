@@ -12,7 +12,9 @@ export const store = {
     isFoldedSideNav: false,
     memoList
   },
-  getters: {},
+  getters: {
+    uid: (state) => state.loginUser.uid
+  },
   mutations: {
     toggleListView(state, payload) {
       const statusKeys = Object.keys(payload)
@@ -28,6 +30,9 @@ export const store = {
     },
     toggleSideNav(state) {
       state.isFoldedSideNav = !state.isFoldedSideNav
+    },
+    createMemo(state, payload) {
+      state.memoList.push(payload)
     }
   },
   actions: {
@@ -42,6 +47,11 @@ export const store = {
     },
     setLoginUser({ commit }, user) {
       commit("setLoginUser", user)
+    },
+    async createMemo({ commit, getters }, memo) {
+      console.log(memo)
+      const { id } = await firebase.firestore().collection(`/users/${getters.uid}/memos/`).add(memo)
+      commit("createMemo", { id, ...memo })
     }
   },
   modules: {}

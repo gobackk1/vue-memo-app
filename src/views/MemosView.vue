@@ -1,6 +1,6 @@
 <template>
   <MemosTemplate :isFolded="isFolded">
-    <CreateMemoInput slot="create-memo-input" />
+    <CreateMemoInput slot="create-memo-input" :createMemo="createMemo" />
     <MemoList
       :memoList="memoList"
       :mode="currentListView"
@@ -16,6 +16,7 @@ import MemosTemplate from "@/components/templates/MemosTemplate"
 import MemoList from "@/components/organisms/MemoList"
 import CreateMemoInput from "@/components/molecules/CreateMemoInput"
 import { showMemoModal } from "@/mixins/memoModal"
+import { mapActions } from "vuex"
 
 export default {
   name: "MemosView",
@@ -52,10 +53,7 @@ export default {
       // TODO: dispatch('action', id) の実装
       console.log(id, "onClickDelete")
     },
-    createMemo() {
-      // TODO: dispatch('action', id) の実装
-      console.log("createMemo")
-    }
+    ...mapActions(["createMemo"])
   },
   created() {
     this.memoList = this.$store.state.memoList

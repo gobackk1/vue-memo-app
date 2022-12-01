@@ -3,14 +3,14 @@
     <div :class="classes">
       <Input
         type="text"
-        v-model="memoTitle"
+        v-model="title"
         placeholder="メモのタイトルを入力..."
         @focus="onFocusInput"
         class="input-title"
         ref="title"
       />
       <div v-show="isEditing" class="body">
-        <textarea v-model="memoBody" rows="3" ref="body" placeholder="メモ本文を入力..." class="input-body"></textarea>
+        <textarea v-model="body" rows="3" ref="body" placeholder="メモ本文を入力..." class="input-body"></textarea>
         <Button @click="onClickCreate" :disabled="disabled" ref="create-button">作成</Button>
       </div>
     </div>
@@ -29,8 +29,8 @@ export default {
   data() {
     return {
       isEditing: false,
-      memoTitle: "",
-      memoBody: ""
+      title: "",
+      body: ""
     }
   },
   methods: {
@@ -44,11 +44,11 @@ export default {
     },
     onClickCreate() {
       this.createMemo({
-        memoTitle: this.memoTitle,
-        memoBody: this.memoBody
+        title: this.title,
+        body: this.body
       })
-      this.memoTitle = ""
-      this.memoBody = ""
+      this.title = ""
+      this.body = ""
       this.isEditing = false
     },
     closeTextarea(ev) {
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     disabled() {
-      return this.memoTitle === "" && this.memoBody === ""
+      return this.title === "" && this.body === ""
     },
     classes() {
       return this.isEditing ? ["root", "is-editing"] : ["root"]
