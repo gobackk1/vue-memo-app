@@ -49,7 +49,7 @@ export const navList = [
     id: 1,
     name: "メモ",
     icon: "sticky_note_2",
-    to: "/memos"
+    to: "memos"
   },
   {
     id: 2,
@@ -69,12 +69,12 @@ export const navList = [
     id: 4,
     name: "アーカイブ",
     icon: "archive",
-    to: "/archive"
+    to: "archives"
   },
   {
     id: 5,
     name: "ゴミ箱",
     icon: "delete",
-    to: "/trash"
+    to: "trashes"
   }
 ]
