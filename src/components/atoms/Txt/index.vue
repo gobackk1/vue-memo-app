@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { APP_PREFIX } from "@/constant"
+
 export default {
   name: "AppTxt",
   props: {
@@ -21,8 +23,8 @@ export default {
   computed: {
     classes() {
       let classes = []
-      if (this.role) classes.push(`color-${this.role}`)
-      if (this.size) classes.push(`size-${this.size}`)
+      if (this.role) classes.push(`${APP_PREFIX}color-${this.role}`)
+      if (this.size) classes.push(`${APP_PREFIX}size-${this.size}`)
       return classes.join(" ")
     }
   }

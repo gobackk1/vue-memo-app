@@ -1,5 +1,9 @@
 @import "./property";
 
+// 変数
+$app-prefix: "App--";
+
+// リセット
 html {
   font-size: 62.5%;
   font-family: $font-family;
@@ -32,6 +36,7 @@ button {
   background: none;
 }
 
+// アプリの抽象的なCSSクラス
 $font-size-map: (
   xxs: $font-size-xxs,
   xs: $font-size-xs,
@@ -45,28 +50,28 @@ $font-size-map: (
 );
 
 @each $key, $value in $font-size-map {
-  .size-#{$key} {
+  .#{$app-prefix}size-#{$key} {
     font-size: $value;
   }
 }
 
-.clickable {
+.#{$app-prefix}clickable {
   cursor: pointer;
 }
 
-.color-success {
+.#{$app-prefix}color-success {
   color: $color-success;
 }
-.color-danger {
+.#{$app-prefix}color-danger {
   color: $color-danger;
 }
-.color-warning {
+.#{$app-prefix}color-warning {
   color: $color-warning;
 }
-.color-info {
+.#{$app-prefix}color-info {
   color: $color-info;
 }
-.color-primary {
+.#{$app-prefix}color-primary {
   color: $color-primary;
 }
 
