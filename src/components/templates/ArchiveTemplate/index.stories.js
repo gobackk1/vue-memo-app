@@ -1,17 +1,16 @@
-import MemosTemplate from "./index"
+import ArchiveTemplate from "./index"
 import { routes } from "@/router"
 import VueRouter from "vue-router"
 import MemoList from "@/components/organisms/MemoList"
-import CreateMemoInput from "@/components/molecules/CreateMemoInput"
 import { memoList } from "@/devVariables"
 import { action } from "@storybook/addon-actions"
 
 export default {
-  name: "MemosTemplate"
+  name: "ArchiveTemplate"
 }
 
 const Template = (args, { argTypes }) => ({
-  components: { MemosTemplate, CreateMemoInput, MemoList },
+  components: { ArchiveTemplate, MemoList },
   router: new VueRouter({ routes }),
   props: Object.keys(argTypes),
   data() {
@@ -37,8 +36,7 @@ const Template = (args, { argTypes }) => ({
     }
   },
   template: `
-    <MemosTemplate :isFolded="isFolded">
-      <CreateMemoInput slot="create-memo-input" />
+    <ArchiveTemplate :isFolded="isFolded">
       <MemoList
         :memoList="memoList"
         :mode="currentListView"
@@ -46,7 +44,7 @@ const Template = (args, { argTypes }) => ({
         :onClickMemo="showModal"
         slot="contents"
       />
-    </MemosTemplate>
+    </ArchiveTemplate>
   `
 })
 

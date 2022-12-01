@@ -1,6 +1,6 @@
 <template>
   <SideNavLayout :isFolded="isFolded">
-    <NavList slot="side" :list="list" />
+    <NavList slot="side" :list="list" :isFolded="isFolded" />
     <main :class="$style.main" slot="contents">
       <div :class="$style['create-memo']">
         <slot name="create-memo-input" />

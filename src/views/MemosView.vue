@@ -1,16 +1,14 @@
 <template>
-  <div class="">
-    <MemosTemplate :isFolded="isFolded">
-      <CreateMemoInput slot="create-memo-input" />
-      <MemoList
-        :memoList="memoList"
-        :mode="currentListView"
-        :menuIcons="iconMenu"
-        :onClickMemo="showModal"
-        slot="contents"
-      />
-    </MemosTemplate>
-  </div>
+  <MemosTemplate :isFolded="isFolded">
+    <CreateMemoInput slot="create-memo-input" />
+    <MemoList
+      :memoList="memoList"
+      :mode="currentListView"
+      :menuIcons="iconMenu"
+      :onClickMemo="showModal"
+      slot="contents"
+    />
+  </MemosTemplate>
 </template>
 
 <script>
