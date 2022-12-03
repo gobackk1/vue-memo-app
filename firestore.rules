@@ -10,11 +10,13 @@ service cloud.firestore {
 
     match /users/{userId}/memos/{memoId} {
       function isValidMemo(memo) {
-        return memo.size() == 2
+        return memo.size() == 3
           && 'title' in memo && memo.title is string
           && 'body' in memo && memo.body is string
+          && 'status' in memo && memo.status is string
           && memo.title.size() >= 0 && memo.title.size() <= 50
-          && memo.body.size() >= 0 && memo.body.size() <= 300;
+          && memo.body.size() >= 0 && memo.body.size() <= 300
+          && (memo.status == 'live' || memo.status == 'archived' || memo.status == 'trashed');
       }
       allow read: if isUserAuthenticated(userId);
       allow create: if isAuthenticated() && isValidMemo(request.resource.data);
