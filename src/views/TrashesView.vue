@@ -55,8 +55,9 @@ export default {
     }
   },
   created() {
-    // TODO: ゴミ箱メモのみ取得する getter を実装する
-    this.memoList = this.$store.state.memoList
+    this.$store.watch(() => {
+      this.memoList = this.$store.getters.getMemosByStatus("trashed")
+    })
   },
   mixins: [showMemoModal]
 }

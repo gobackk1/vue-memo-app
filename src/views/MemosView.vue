@@ -43,6 +43,10 @@ export default {
     currentListView() {
       return this.$store.state.currentListView
     }
+    // memoList() {
+    //   console.log("memoList")
+    //   return this.$store.getters.getMemosByStatus
+    // }
   },
   methods: {
     onClickArchive({ id }) {
@@ -56,7 +60,9 @@ export default {
     ...mapActions(["createMemo"])
   },
   created() {
-    this.memoList = this.$store.state.memoList
+    this.$store.watch(() => {
+      this.memoList = this.$store.getters.getMemosByStatus("live")
+    })
   },
   mixins: [showMemoModal]
 }

@@ -41,6 +41,7 @@ export default {
       this.setLoginUser(user)
 
       if (user) {
+        this.fetchMemos()
         if (this.$route.name === "home") {
           this.$router.push("memos")
         }
@@ -60,7 +61,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["setLoginUser", "logout"]),
+    ...mapActions(["setLoginUser", "logout", "fetchMemos"]),
     ...mapMutations(["initializeAuth", "logoutUser"]),
     toggleStatus() {
       this.$store.commit("toggleListView", this.statusIconMapping)

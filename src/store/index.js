@@ -1,7 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import firebase from "firebase"
-import { memoList } from "@/devVariables"
 
 Vue.use(Vuex)
 
@@ -10,10 +9,11 @@ export const store = {
     currentListView: "grid",
     loginUser: null,
     isFoldedSideNav: false,
-    memoList
+    memoList: []
   },
   getters: {
-    uid: (state) => state.loginUser.uid
+    uid: (state) => state.loginUser.uid,
+    getMemosByStatus: (state) => (status) => state.memoList.filter((memo) => memo.status === status)
   },
   mutations: {
     toggleListView(state, payload) {
@@ -31,7 +31,7 @@ export const store = {
     toggleSideNav(state) {
       state.isFoldedSideNav = !state.isFoldedSideNav
     },
-    createMemo(state, payload) {
+    addMemo(state, payload) {
       state.memoList.push(payload)
     }
   },
@@ -41,17 +41,22 @@ export const store = {
       firebase.auth().signInWithRedirect(provider)
     },
     async logout({ commit }) {
-      const logout = await firebase.auth().signOut()
-      console.log(logout)
+      await firebase.auth().signOut()
       commit("logoutUser")
     },
     setLoginUser({ commit }, user) {
       commit("setLoginUser", user)
     },
     async createMemo({ commit, getters }, memo) {
-      console.log(memo)
-      const { id } = await firebase.firestore().collection(`/users/${getters.uid}/memos/`).add(memo)
-      commit("createMemo", { id, ...memo })
+      const data = { ...memo, status: "live" }
+      const { id } = await firebase.firestore().collection(`/users/${getters.uid}/memos/`).add(data)
+      commit("addMemo", { id, ...data })
+    },
+    async fetchMemos({ commit, getters }) {
+      const snapshot = await firebase.firestore().collection(`/users/${getters.uid}/memos/`).get()
+      snapshot.forEach((doc) => {
+        commit("addMemo", { id: doc.id, ...doc.data() })
+      })
     }
   },
   modules: {}
