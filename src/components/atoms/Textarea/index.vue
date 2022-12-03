@@ -1,5 +1,5 @@
 <template>
-  <textarea :class="$style.root" v-on="$listeners" v-bind="$attrs"></textarea>
+  <textarea :class="$style.root" :value="value" v-on="$listeners" v-bind="$attrs"></textarea>
 </template>
 
 <script>

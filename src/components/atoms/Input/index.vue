@@ -1,5 +1,5 @@
 <template>
-  <input :class="$style.root" v-on="$listeners" v-bind="$attrs" />
+  <input :class="$style.root" :value="value" v-on="$listeners" v-bind="$attrs" />
 </template>
 
 <script>

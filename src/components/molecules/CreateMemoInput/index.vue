@@ -6,12 +6,14 @@
         placeholder="メモのタイトルを入力..."
         @focus="onFocusInput"
         @input="title = $event.target.value"
+        :value="title"
         class="input-title"
         ref="title"
       />
       <div v-show="isEditing" class="body">
         <Textarea
           @input="body = $event.target.value"
+          :value="body"
           rows="3"
           ref="body"
           placeholder="メモ本文を入力..."

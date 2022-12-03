@@ -37,11 +37,11 @@ export default {
   },
 
   methods: {
-    onInputTitle(value) {
-      this.edited.title = value
+    onInputTitle(ev) {
+      this.edited.title = ev.target.value
     },
-    onInputBody(value) {
-      this.edited.body = value
+    onInputBody(ev) {
+      this.edited.body = ev.target.value
     },
     onClickUpdate() {
       this.$listeners.clickUpdate(this.edited)
