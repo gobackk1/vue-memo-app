@@ -77,7 +77,6 @@ export const store = {
     },
     async updateMemo({ commit, getters }, memo) {
       const { id, ...other } = memo
-      console.log(other)
       await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).update(other)
       commit("updateMemo", { id, ...other })
     }

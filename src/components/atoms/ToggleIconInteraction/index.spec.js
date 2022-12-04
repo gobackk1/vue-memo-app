@@ -19,7 +19,6 @@ describe("ToggleIconInteraction", () => {
   })
 
   it("mappingをもとにstatusに渡したアイコンを描画すること", async () => {
-    console.log(wrapper.html())
     expect(wrapper.findComponent(Icon).text()).toBe(statusIconMapping["grid"])
     await wrapper.setProps({ status: "column" })
     expect(wrapper.findComponent(Icon).text()).toBe(statusIconMapping["column"])
