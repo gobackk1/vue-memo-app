@@ -9,7 +9,8 @@ describe("MemoEditor", () => {
           memo: {
             title: "title",
             body: "body"
-          }
+          },
+          menuIcons: []
         }
       })
 
@@ -31,7 +32,8 @@ describe("MemoEditor", () => {
           memo: {
             title: "title",
             body: "body"
-          }
+          },
+          menuIcons: []
         },
         listeners: {
           clickUpdate

@@ -74,6 +74,12 @@ export const store = {
     async deleteMemo({ commit, getters }, { id }) {
       await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).delete()
       commit("deleteMemo", id)
+    },
+    async updateMemo({ commit, getters }, memo) {
+      const { id, ...other } = memo
+      console.log(other)
+      await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).update(other)
+      commit("updateMemo", { id, ...other })
     }
   },
   modules: {}
