@@ -1,9 +1,9 @@
 <template>
-  <div class="root" ref="root">
-    <span :class="clickable" @click="onClick">
+  <div :class="$style.root" ref="root">
+    <div :class="[$style.icon, clickable]" @click="onClick">
       <slot name="icon"></slot>
-    </span>
-    <div v-show="isOpen" class="menu" :style="menuStyles">
+    </div>
+    <div v-show="isOpen" :class="$style.menu" :style="menuStyles">
       <slot name="menu"></slot>
     </div>
   </div>
@@ -40,9 +40,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 .root {
   position: relative;
+  display: flex;
+}
+.icon {
+  display: flex;
 }
 .menu {
   position: absolute;
