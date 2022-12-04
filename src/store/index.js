@@ -33,6 +33,14 @@ export const store = {
     },
     addMemo(state, payload) {
       state.memoList.push(payload)
+    },
+    updateMemo(state, payload) {
+      const index = state.memoList.findIndex((memo) => memo.id === payload.id)
+      state.memoList = [...state.memoList.slice(0, index), payload, ...state.memoList.slice(index + 1)]
+    },
+    deleteMemo(state, id) {
+      const index = state.memoList.findIndex((memo) => memo.id === id)
+      state.memoList.splice(index, 1)
     }
   },
   actions: {
@@ -57,6 +65,15 @@ export const store = {
       snapshot.forEach((doc) => {
         commit("addMemo", { id: doc.id, ...doc.data() })
       })
+    },
+    async moveTo({ commit, getters }, { status, memo }) {
+      const { id, ...archived } = { ...memo, status }
+      await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).update(archived)
+      commit("updateMemo", { id, ...archived })
+    },
+    async deleteMemo({ commit, getters }, { id }) {
+      await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).delete()
+      commit("deleteMemo", id)
     }
   },
   modules: {}

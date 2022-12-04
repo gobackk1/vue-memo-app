@@ -16,6 +16,7 @@
 import ArchiveTemplate from "@/components/templates/ArchiveTemplate"
 import MemoList from "@/components/organisms/MemoList"
 import { showMemoModal } from "@/mixins/memoModal"
+import { mapActions } from "vuex"
 
 export default {
   name: "ArchiveView",
@@ -44,15 +45,13 @@ export default {
     }
   },
   methods: {
-    onClickArchive({ id }) {
-      // TODO: dispatch('action', id) の実装
-      // TODO: アーカイブを戻すアクションを実装
-      console.log(id, "onClickArchive")
+    onClickArchive(memo) {
+      this.moveTo({ status: "live", memo })
     },
-    onClickDelete({ id }) {
-      // TODO: dispatch('action', id) の実装
-      console.log(id, "onClickDelete")
-    }
+    onClickDelete(memo) {
+      this.moveTo({ status: "trashed", memo })
+    },
+    ...mapActions(["moveTo"])
   },
   created() {
     this.$store.watch(() => {

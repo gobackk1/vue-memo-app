@@ -43,21 +43,15 @@ export default {
     currentListView() {
       return this.$store.state.currentListView
     }
-    // memoList() {
-    //   console.log("memoList")
-    //   return this.$store.getters.getMemosByStatus
-    // }
   },
   methods: {
-    onClickArchive({ id }) {
-      // TODO: dispatch('action', id) の実装
-      console.log(id, "onClickArchive")
+    onClickArchive(memo) {
+      this.moveTo({ status: "archived", memo })
     },
-    onClickDelete({ id }) {
-      // TODO: dispatch('action', id) の実装
-      console.log(id, "onClickDelete")
+    onClickDelete(memo) {
+      this.moveTo({ status: "trashed", memo })
     },
-    ...mapActions(["createMemo"])
+    ...mapActions(["createMemo", "moveTo"])
   },
   created() {
     this.$store.watch(() => {

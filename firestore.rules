@@ -20,7 +20,8 @@ service cloud.firestore {
       }
       allow read: if isUserAuthenticated(userId);
       allow create: if isAuthenticated() && isValidMemo(request.resource.data);
-      allow update, delete: if isUserAuthenticated(userId) && isValidMemo(request.resource.data);
+      allow update: if isUserAuthenticated(userId) && isValidMemo(request.resource.data);
+      allow delete: if isUserAuthenticated(userId);
     }
   }
 }
