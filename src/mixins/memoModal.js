@@ -6,17 +6,17 @@ export const showMemoModal = {
       this.$modal.show(
         {
           components: { MemoEditor },
-          template: `<MemoEditor :list="list" :memo="memo" @clickUpdate="clickUpdate" />`,
-          props: ["list", "memo"],
+          template: `<MemoEditor :menuIcons="menuIcons" :memo="memo" @clickUpdate="clickUpdate" />`,
+          props: ["menuIcons", "memo"],
           methods: {
             clickUpdate(memo) {
-              //TODO: dispatch update
-              console.log(memo, "clickUpdate")
+              this.$store.dispatch("updateMemo", memo)
+              this.$modal.hide("ModalMemoEditor")
             }
           }
         },
-        { memo, list: this.iconMenu },
-        { height: "auto" }
+        { memo, menuIcons: this.iconMenu },
+        { height: "auto", name: "ModalMemoEditor" }
       )
     }
   }

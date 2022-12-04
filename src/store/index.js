@@ -1,7 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import firebase from "firebase"
-import { memoList } from "@/devVariables"
 
 Vue.use(Vuex)
 
@@ -10,9 +9,12 @@ export const store = {
     currentListView: "grid",
     loginUser: null,
     isFoldedSideNav: false,
-    memoList
+    memoList: []
   },
-  getters: {},
+  getters: {
+    uid: (state) => state.loginUser.uid,
+    getMemosByStatus: (state) => (status) => state.memoList.filter((memo) => memo.status === status)
+  },
   mutations: {
     toggleListView(state, payload) {
       const statusKeys = Object.keys(payload)
@@ -28,6 +30,17 @@ export const store = {
     },
     toggleSideNav(state) {
       state.isFoldedSideNav = !state.isFoldedSideNav
+    },
+    addMemo(state, payload) {
+      state.memoList.push(payload)
+    },
+    updateMemo(state, payload) {
+      const index = state.memoList.findIndex((memo) => memo.id === payload.id)
+      state.memoList = [...state.memoList.slice(0, index), payload, ...state.memoList.slice(index + 1)]
+    },
+    deleteMemo(state, id) {
+      const index = state.memoList.findIndex((memo) => memo.id === id)
+      state.memoList.splice(index, 1)
     }
   },
   actions: {
@@ -36,12 +49,36 @@ export const store = {
       firebase.auth().signInWithRedirect(provider)
     },
     async logout({ commit }) {
-      const logout = await firebase.auth().signOut()
-      console.log(logout)
+      await firebase.auth().signOut()
       commit("logoutUser")
     },
     setLoginUser({ commit }, user) {
       commit("setLoginUser", user)
+    },
+    async createMemo({ commit, getters }, memo) {
+      const data = { ...memo, status: "live" }
+      const { id } = await firebase.firestore().collection(`/users/${getters.uid}/memos/`).add(data)
+      commit("addMemo", { id, ...data })
+    },
+    async fetchMemos({ commit, getters }) {
+      const snapshot = await firebase.firestore().collection(`/users/${getters.uid}/memos/`).get()
+      snapshot.forEach((doc) => {
+        commit("addMemo", { id: doc.id, ...doc.data() })
+      })
+    },
+    async moveTo({ commit, getters }, { status, memo }) {
+      const { id, ...archived } = { ...memo, status }
+      await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).update(archived)
+      commit("updateMemo", { id, ...archived })
+    },
+    async deleteMemo({ commit, getters }, { id }) {
+      await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).delete()
+      commit("deleteMemo", id)
+    },
+    async updateMemo({ commit, getters }, memo) {
+      const { id, ...other } = memo
+      await firebase.firestore().collection(`/users/${getters.uid}/memos`).doc(id).update(other)
+      commit("updateMemo", { id, ...other })
     }
   },
   modules: {}

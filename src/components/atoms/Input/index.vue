@@ -1,11 +1,5 @@
 <template>
-  <input
-    :class="$style.root"
-    :value="value"
-    @input="$emit('input', $event.target.value)"
-    @focus="$emit('focus')"
-    v-bind="$attrs"
-  />
+  <input :class="$style.root" :value="value" v-on="$listeners" v-bind="$attrs" />
 </template>
 
 <script>

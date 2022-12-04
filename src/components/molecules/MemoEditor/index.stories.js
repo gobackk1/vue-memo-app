@@ -28,7 +28,7 @@ export const Default = () => ({
     }
   },
   components: { MemoEditor },
-  template: `<MemoEditor :list="list" :memo="memo" @clickUpdate="clickUpdate" />`
+  template: `<MemoEditor :menuIcons="list" :memo="memo" @clickUpdate="clickUpdate" />`
 })
 export const WithModal = () => ({
   methods: {
@@ -36,15 +36,15 @@ export const WithModal = () => ({
       this.$modal.show(
         {
           components: { MemoEditor },
-          template: `<MemoEditor :list="list" :memo="memo" @clickUpdate="clickUpdate" />`,
-          props: ["list", "memo"],
+          template: `<MemoEditor :menuIcons="list" :memo="memo" @clickUpdate="clickUpdate" />`,
+          props: ["menuIcons", "memo"],
           methods: {
             clickUpdate(memo) {
               action("clickUpdate")(memo)
             }
           }
         },
-        { memo: { title: "title", body: "body", id: 1 }, list },
+        { memo: { title: "title", body: "body", id: 1 }, menuIcons: iconList },
         { height: "auto" }
       )
     }

@@ -29,7 +29,6 @@ describe("IconsMenu", () => {
 
     it("アイコンをクリックするとlist.callback を実行すること", async () => {
       await Promise.all([icon1.trigger("click"), icon2.trigger("click"), icon3.trigger("click")])
-      console.log(icon1.emitted())
       expect(callback1).toHaveBeenCalledTimes(1)
       expect(callback2).toHaveBeenCalledTimes(1)
       expect(callback3).toHaveBeenCalledTimes(1)

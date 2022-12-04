@@ -2,6 +2,7 @@ import ClickMenuInteraction from "./index.vue"
 import { mount } from "@vue/test-utils"
 import Icon from "@/components/atoms/Icon"
 import ContextMenu from "@/components/molecules/ContextMenu"
+import { APP_PREFIX } from "@/constant"
 
 const menuList = [
   {
@@ -48,12 +49,20 @@ describe("ClickMenuInteraction", () => {
   })
   it("メニューが表示されていないときにアイコンをクリックすると、メニューが表示されること", async () => {
     await wrapper.setData({ isOpen: false })
-    await wrapper.element.querySelector(".clickable").click()
+    await wrapper.element.querySelector(`.${APP_PREFIX}clickable`).click()
     expect(ContextMenuComponent.isVisible()).toBe(true)
   })
   it("メニューが表示されているときにアイコンをクリックすると、メニューが非表示になること", async () => {
     await wrapper.setData({ isOpen: true })
-    await wrapper.element.querySelector(".clickable").click()
+    await wrapper.element.querySelector(`.${APP_PREFIX}clickable`).click()
+    expect(ContextMenuComponent.isVisible()).toBe(false)
+  })
+  it("コンポーネントの外側をクリックすると、メニューが非表示になること", async () => {
+    await wrapper.setData({ isOpen: true })
+    const div = document.createElement("div")
+    div.className = "mock-element"
+    document.body.appendChild(div)
+    await div.click()
     expect(ContextMenuComponent.isVisible()).toBe(false)
   })
   it("画面中央より左に描画された時、メニューのインラインスタイルに left: 0が付与されること", async () => {

@@ -1,5 +1,6 @@
 import { shallowMount } from "@vue/test-utils"
 import Icon from "./index.vue"
+import { APP_PREFIX } from "@/constant"
 
 describe("Iconコンポーネント", () => {
   const name = "menu"
@@ -83,7 +84,7 @@ describe("Iconコンポーネント", () => {
         click: handleClick
       }
     })
-    expect(wrapper.classes().includes("clickable")).toBe(true)
+    expect(wrapper.classes().includes(`${APP_PREFIX}clickable`)).toBe(true)
   })
 
   // it("スナップショットテスト", () => {

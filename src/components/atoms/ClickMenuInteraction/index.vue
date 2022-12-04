@@ -1,15 +1,16 @@
 <template>
-  <div class="root" ref="root">
-    <span class="clickable" @click="onClick">
+  <div :class="$style.root" ref="root">
+    <div :class="[$style.icon, clickable]" @click="onClick">
       <slot name="icon"></slot>
-    </span>
-    <div v-show="isOpen" class="menu" :style="menuStyles">
+    </div>
+    <div v-show="isOpen" :class="$style.menu" :style="menuStyles">
       <slot name="menu"></slot>
     </div>
   </div>
 </template>
 
 <script>
+import { APP_PREFIX } from "@/constant"
 export default {
   name: "ClickMenuInteraction",
   data() {
@@ -20,31 +21,44 @@ export default {
   },
   mounted() {
     this.iconPosX = this.$refs.root.firstElementChild.getBoundingClientRect().x
+    window.addEventListener("click", this.closeMenu)
   },
   computed: {
     menuStyles() {
       const center = window.innerWidth / 2
       const styles = center >= this.iconPosX ? { left: 0 } : { right: 0 }
       return styles
+    },
+    clickable() {
+      return `${APP_PREFIX}clickable`
     }
   },
   methods: {
     onClick() {
       this.isOpen = !this.isOpen
+    },
+    closeMenu(ev) {
+      if (!this.$el.contains(ev.target)) {
+        this.isOpen = false
+      }
     }
+  },
+  beforeDestroy() {
+    window.removeEventListener("click", this.closeMenu)
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 .root {
   position: relative;
+  display: flex;
+}
+.icon {
+  display: flex;
 }
 .menu {
   position: absolute;
   top: 100%;
-}
-.clickable {
-  cursor: pointer;
 }
 </style>

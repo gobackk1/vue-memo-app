@@ -16,6 +16,7 @@
 import TrashesTemplate from "@/components/templates/TrashesTemplate"
 import MemoList from "@/components/organisms/MemoList"
 import { showMemoModal } from "@/mixins/memoModal"
+import { mapActions } from "vuex"
 
 export default {
   name: "TrashesView",
@@ -44,19 +45,18 @@ export default {
     }
   },
   methods: {
-    onClickArchive({ id }) {
-      // TODO: dispatch('action', id) の実装
-      // TODO: 削除を戻すアクションを実装
-      console.log(id, "onClickArchive")
+    onClickArchive(memo) {
+      this.moveTo({ status: "archived", memo })
     },
-    onClickDelete({ id }) {
-      // TODO: dispatch('action', id) の実装
-      console.log(id, "onClickDelete")
-    }
+    onClickDelete(memo) {
+      this.deleteMemo(memo)
+    },
+    ...mapActions(["moveTo", "deleteMemo"])
   },
   created() {
-    // TODO: ゴミ箱メモのみ取得する getter を実装する
-    this.memoList = this.$store.state.memoList
+    this.$store.watch(() => {
+      this.memoList = this.$store.getters.getMemosByStatus("trashed")
+    })
   },
   mixins: [showMemoModal]
 }

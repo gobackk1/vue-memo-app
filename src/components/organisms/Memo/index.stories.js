@@ -9,7 +9,7 @@ export default {
 const Template = (arg, { argTypes }) => ({
   components: { Memo },
   props: Object.keys(argTypes),
-  template: `<Memo :list="list" :memo="memo" :onClickMemo="onClickMemo"></Memo>`
+  template: `<Memo :menuIcons="menuIcons" :memo="memo" :onClickMemo="onClickMemo"></Memo>`
 })
 
 export const Default = Template.bind({})
