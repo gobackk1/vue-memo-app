@@ -1,6 +1,6 @@
 <template>
   <div class="root" ref="root">
-    <span class="clickable" @click="onClick">
+    <span :class="clickable" @click="onClick">
       <slot name="icon"></slot>
     </span>
     <div v-show="isOpen" class="menu" :style="menuStyles">
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { APP_PREFIX } from "@/constant"
 export default {
   name: "ClickMenuInteraction",
   data() {
@@ -26,6 +27,9 @@ export default {
       const center = window.innerWidth / 2
       const styles = center >= this.iconPosX ? { left: 0 } : { right: 0 }
       return styles
+    },
+    clickable() {
+      return `${APP_PREFIX}clickable`
     }
   },
   methods: {
@@ -43,8 +47,5 @@ export default {
 .menu {
   position: absolute;
   top: 100%;
-}
-.clickable {
-  cursor: pointer;
 }
 </style>
