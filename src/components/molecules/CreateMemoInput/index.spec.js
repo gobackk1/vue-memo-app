@@ -56,7 +56,7 @@ describe("CreateMemoInput", () => {
       const div = document.createElement("div")
       div.className = "mock-element"
       document.body.appendChild(div)
-      await document.querySelector(".mock-element").click()
+      await div.click()
       expect(wrapper.findComponent({ ref: "body" }).isVisible()).toBe(false)
       expect(wrapper.findComponent({ ref: "create-button" }).isVisible()).toBe(false)
     })

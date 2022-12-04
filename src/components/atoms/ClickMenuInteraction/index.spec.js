@@ -57,6 +57,14 @@ describe("ClickMenuInteraction", () => {
     await wrapper.element.querySelector(`.${APP_PREFIX}clickable`).click()
     expect(ContextMenuComponent.isVisible()).toBe(false)
   })
+  it("コンポーネントの外側をクリックすると、メニューが非表示になること", async () => {
+    await wrapper.setData({ isOpen: true })
+    const div = document.createElement("div")
+    div.className = "mock-element"
+    document.body.appendChild(div)
+    await div.click()
+    expect(ContextMenuComponent.isVisible()).toBe(false)
+  })
   it("画面中央より左に描画された時、メニューのインラインスタイルに left: 0が付与されること", async () => {
     // NOTE: テスト環境の window.innerWidth は 1024
     await wrapper.setData({ iconPosX: 400 })

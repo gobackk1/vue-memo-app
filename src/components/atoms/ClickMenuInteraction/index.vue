@@ -21,6 +21,7 @@ export default {
   },
   mounted() {
     this.iconPosX = this.$refs.root.firstElementChild.getBoundingClientRect().x
+    window.addEventListener("click", this.closeMenu)
   },
   computed: {
     menuStyles() {
@@ -35,7 +36,15 @@ export default {
   methods: {
     onClick() {
       this.isOpen = !this.isOpen
+    },
+    closeMenu(ev) {
+      if (!this.$el.contains(ev.target)) {
+        this.isOpen = false
+      }
     }
+  },
+  beforeDestroy() {
+    window.removeEventListener("click", this.closeMenu)
   }
 }
 </script>
