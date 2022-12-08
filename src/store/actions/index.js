@@ -1,14 +1,6 @@
 import firebase from "firebase"
 
 const actions = {
-  login() {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    firebase.auth().signInWithRedirect(provider)
-  },
-  async logout({ commit }) {
-    await firebase.auth().signOut()
-    commit("logoutUser")
-  },
   setLoginUser({ commit }, user) {
     commit("setLoginUser", user)
   },

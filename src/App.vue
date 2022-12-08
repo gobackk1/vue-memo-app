@@ -16,6 +16,7 @@
 import Header from "@/components/organisms/Header"
 import firebase from "firebase"
 import { mapActions, mapMutations } from "vuex"
+import AppFirebase from "@/firebase"
 
 export default {
   components: { Header },
@@ -61,13 +62,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["setLoginUser", "logout", "fetchMemos"]),
+    ...mapActions(["setLoginUser", "fetchMemos"]),
     ...mapMutations(["initializeAuth", "logoutUser"]),
     toggleStatus() {
       this.$store.commit("toggleListView", this.statusIconMapping)
     },
     onClickMenu() {
       this.$store.commit("toggleSideNav")
+    },
+    logout() {
+      AppFirebase.logout()
     }
   }
 }

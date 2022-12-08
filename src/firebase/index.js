@@ -6,7 +6,7 @@ class AppFirebase {
     this.firebase = null
     this.auth = firebase.auth
     this.vueApp = null
-    this.token = ""
+    this.token = null
   }
 
   initialize(firebaseConfig) {
@@ -35,6 +35,17 @@ class AppFirebase {
       this.token = await this.auth().currentUser.getIdToken(true)
       return this.token
     }
+  }
+
+  async login() {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    await firebase.auth().signInWithRedirect(provider)
+    this.token = await this.getToken()
+  }
+
+  async logout() {
+    await this.auth().signOut()
+    this.token = null
   }
 }
 

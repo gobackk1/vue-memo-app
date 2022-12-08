@@ -8,13 +8,15 @@
 <script>
 import Button from "@/components/atoms/Button"
 import HomeTemplate from "@/components/templates/HomeTemplate"
-import { mapActions } from "vuex"
+import AppFirebase from "@/firebase"
 
 export default {
   name: "HomeView",
   components: { Button, HomeTemplate },
   methods: {
-    ...mapActions(["login"])
+    login() {
+      AppFirebase.login()
+    }
   }
 }
 </script>
