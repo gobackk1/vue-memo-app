@@ -9,18 +9,18 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "deploy": "firebase deploy",
     "test:unit": "vue-cli-service test:unit",
-    "test:unit:update": "npm run test:unit -- -u",
     "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint",
+    "deploy": "firebase deploy",
+    "bs:approve": "backstop approve",
     "bs:ref": "backstop reference",
     "bs:test": "backstop test",
-    "bs:approve": "backstop approve",
-    "lint": "vue-cli-service lint",
+    "fb:deploy:rules": "firebase deploy --only firestore:rules",
+    "fb:emu:start": "firebase emulators:start",
     "storybook:build": "vue-cli-service storybook:build -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook",
-    "fb:deploy:rules": "firebase deploy --only firestore:rules",
-    "fb:emu:start": "firebase emulators:start"
+    "test:unit:update": "npm run test:unit -- -u"
   },
   "dependencies": {
     "axios": "^1.2.1",
@@ -29,6 +29,7 @@
     "vue": "^2.6.14",
     "vue-js-modal": "^2.0.1",
     "vue-router": "^3.5.1",
+    "vuetify": "^2.6.0",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
@@ -60,6 +61,12 @@
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "vue-cli-plugin-storybook": "^3.0.0-rc.1",
-    "vue-template-compiler": "^2.6.14"
+    "vue-cli-plugin-vuetify": "^2.5.8",
+    "vue-template-compiler": "^2.6.14",
+    "vuetify-loader": "^1.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gobackk1/vue-memo-app"
   }
 }

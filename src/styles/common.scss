@@ -76,6 +76,9 @@ $font-size-map: (
 }
 
 // NOTE: 3rd ベンダースタイルのオーバーライドはここに書く。記述が増えたらモジュールへ切り出す
+// vuetify SASS変数は src/styles/variables.scss へ書く。
+
 .vm--modal {
+  // vue-js-modal の背景色をアプリと合わせる
   background-color: $color-bg !important;
 }

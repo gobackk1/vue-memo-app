@@ -6,6 +6,7 @@ import store from "./store"
 import VModal from "vue-js-modal"
 import { FIREBASE_CONFIG } from "@/constant"
 import AppFirebase from "@/firebase"
+import vuetify from "./plugins/vuetify"
 
 Vue.use(VModal)
 Vue.config.productionTip = false
@@ -15,6 +16,7 @@ AppFirebase.initializeVueApp(
   new Vue({
     router,
     store,
+    vuetify,
     render: (h) => h(App)
   })
 )
