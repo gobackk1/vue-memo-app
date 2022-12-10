@@ -19,6 +19,9 @@ const actions = {
   async fetchMemos({ commit, getters }) {
     const response = await firestoreAxios.get(`/users/${getters.uid}/memos`)
 
+    const isNoMemoData = response.data.documents === undefined
+    if (isNoMemoData) return
+
     response.data.documents.forEach(({ name, fields }) => {
       commit("addMemo", {
         id: name.split("memos/")[1],
